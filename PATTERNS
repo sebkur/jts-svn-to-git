@@ -1,0 +1,17 @@
+# To derive the patterns for the 'convert.to.unix.sh' file, do the following:
+
+# Either run this to get all the files in the current revision:
+find . -path ./.git -prune -o -type f -print | sed -e "s/.*\///" > /tmp/filelist
+
+# Or use this to get all files of all revisions:
+git filter-branch --tree-filter '/path/to/list.files.sh' -- --all
+
+sed -e "s/.*\./\./" /tmp/filelist | sort | uniq -c | sort -n
+sed -e "s/.*\./\./" /tmp/filelist | sort | uniq > endings
+
+# then manually create file 'textpatterns' from 'endings' by selecting the text file types
+# and prepending asterisks, i.e. '.java' -> '*.java'
+
+# then run this to produce a file that can be copied into the 'convert.to.unix.sh' file:
+set -o noglob
+for f in $(cat textpatterns); do echo -e "\t-o -name \"$f\" \\" >> find.patterns; done
