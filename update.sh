@@ -9,3 +9,4 @@ cd "$REPO"
 
 svn2git svn://svn.code.sf.net/p/jts-topo-suite/code --authors ../jts.authors
 git filter-branch -f --tree-filter "$CONVERT" svn/trunk
+git merge svn/trunk
