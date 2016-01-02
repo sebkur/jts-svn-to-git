@@ -1,0 +1,7 @@
+Run 'init.sh' to fetch the SVN repository
+
+Run 'update.sh' to fetch new commits from the svn upstream
+
+For testing purposes you can append something like this to the svn2git commands
+in both scripts to limit the revisions fetched:
+--revision 1:9
